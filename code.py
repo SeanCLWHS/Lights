@@ -17,7 +17,8 @@ pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=0.3, auto_write=Fal
 pixel_num = 0
 
 level = 0
-speed = 1
+speed = 0.25
+win = False
 
 RED = (255, 0, 0) #RGB
 YELLOW = (255, 150, 0)
@@ -35,14 +36,45 @@ def Reset():
     pixels.show()
     time.sleep(1)
     pixel_num = 0
+    #win = false
 
+def ButtonPress():
+    return switch.value
 
 while True:
-    Reset()
-    for pixel_num in range(16):
-        pixels[pixel_num]=GREEN
-        pixels.show()
-        time.sleep(speed)
+    speed = 0.25
+    for level in range(16):
+        Reset()
+        for pixel_num in range(16):
+            pixels[pixel_num]=GREEN
+            pixels.show()
+            time.sleep(speed)
+            if not ButtonPress():
+                if pixel_num == 15:
+                    win = True
+                else:
+                    break
+        if win:
+            if level == 15:
+                pixels.fill(GREEN)
+                pixels.show()
+                time.sleep(5)
+            else:
+                time.sleep(1)
+                speed *=0.75
+        else:
+            pixels.fill(RED)
+            pixels.show()
+            time.sleep(2.5)
+            pixels.fill(OFF)
+            for x in range(level+1):
+                pixels[x] = GREEN
+                pixels.show()
+                time.sleep(0.5)
+            time.sleep(5)
+            break
+        win = False
+
 
 
 
