@@ -19,6 +19,7 @@ pixel_num = 0
 level = 0
 speed = 0.25
 win = False
+done = False
 
 RED = (255, 0, 0) #RGB
 YELLOW = (255, 150, 0)
@@ -36,6 +37,7 @@ def Reset():
     pixels.show()
     time.sleep(1)
     pixel_num = 0
+    
     #win = false
 
 def ButtonPress():
@@ -56,9 +58,14 @@ while True:
                     break
         if win:
             if level == 15:
-                pixels.fill(GREEN)
-                pixels.show()
-                time.sleep(5)
+                pixels.fill(OFF)
+                for x in range(level+1):
+                    pixels[x] = CYAN
+                    pixels.show()
+                    time.sleep(0.5)
+                while ButtonPress():
+                    pass
+                break
             else:
                 time.sleep(1)
                 speed *=0.75
@@ -68,15 +75,11 @@ while True:
             time.sleep(2.5)
             pixels.fill(OFF)
             for x in range(level+1):
-                pixels[x] = GREEN
+                pixels[x] = CYAN
                 pixels.show()
                 time.sleep(0.5)
-            time.sleep(5)
+            while ButtonPress():
+                pass
             break
+            
         win = False
-
-
-
-
-
-
