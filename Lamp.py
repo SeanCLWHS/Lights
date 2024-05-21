@@ -30,7 +30,13 @@ pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=0.3, auto_write=Fal
 
 OFF = (0,0,0)
 
-colors = []
+MINT = (0, 255, 191)
+TURQUOISE = (3, 252, 227)
+BLUE1 = (3, 152, 252)
+NAVY = (4, 64, 194)
+PURPLE = (214, 120, 255)
+
+colors = [MINT, TURQUOISE, BLUE1, NAVY, PURPLE]
 colornum = 0
 color = OFF
 colorlist = []
@@ -75,4 +81,3 @@ while True:
 
     pixels.fill(color)
     pixels.show()
-
