@@ -40,23 +40,26 @@ colors = [MINT, TURQUOISE, BLUE1, NAVY, PURPLE]
 colornum = 0
 color = OFF
 colorlist = []
+colorcycle = 0
 
 fade = 16
 fadeup = False
 
 while True:
+    #print(pot.value)
     #print(math.sqrt(pot.value)-1)
+    time.sleep(0.05)
     if switch1.value:
         #print(1)
         if not button.value:
-            colornum += 1
-            if colornum > len(colors):
+            colornum += 0.5
+            if math.floor(colornum) > len(colors):
                 colornum = 0
-        if colornum == len(colors):
+        if math.floor(colornum) == len(colors):
             #rgb
             pass
         else:
-            color = colors[colornum]
+            color = colors[math.floor(colornum)]
         if switch2.value:
             colorlist = list(color)
             for x in range(len(colorlist)):
@@ -73,8 +76,12 @@ while True:
             elif fade == 16:
                 fadeup = False
         else:
-            #potentiometer
-            pass
+            colorlist = list(color)
+            for x in range(len(colorlist)):
+                num = colorlist[x]
+                num *= (math.sqrt(pot.value)-1)/256
+                colorlist[x] = int(num)
+            color = tuple(colorlist)
     else:
         color = OFF
         #print(0)
