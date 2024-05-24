@@ -26,7 +26,7 @@ button.pull = Pull.UP
 potpin = board.A4  #pin 0 is Analog input 2
 pot = analogio.AnalogIn(potpin)
 
-pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=0.3, auto_write=False)
+pixels = neopixel.NeoPixel(pixel_pin, num_pixels, brightness=1, auto_write=False)
 
 OFF = (0,0,0)
 
